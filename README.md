@@ -2,7 +2,7 @@
 
 # 🧠 Sotstech Python Editor
 
-### Yapay zekâ destekli, çok sekmeli, masaüstü Python kod editörü
+### An AI-powered, multi-tab, desktop Python code editor
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue?logo=python&logoColor=white)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)
@@ -11,47 +11,49 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Version](https://img.shields.io/badge/version-2.0.34-blueviolet)
 
-**Kod yaz, tek tıkla çalıştır, seçtiğin kod parçasına doğal dilde talimat ver, yapay zekâ senin için düzenlesin.**
-Eksik kütüphaneleri otomatik kurar, `input()` çağrılarını pencere ile karşılar, matplotlib/OpenCV gibi grafik çıktılarını sorunsuz gösterir.
+**Write code, run it instantly, select any snippet, describe what you want in plain English — and let AI rewrite it for you.**
+Missing libraries get installed automatically, `input()` calls are handled through a clean modern dialog instead of freezing your console, and graphical output from matplotlib, OpenCV, and more just works.
 
-[Özellikler](#-özellikler) •
-[Ekran Görüntüleri](#-ekran-görüntüleri) •
-[Kurulum](#-kurulum) •
-[API Anahtarı](#-openai-api-anahtarını-tanımlama) •
-[.exe Olarak Kullanım](#-hazır-exe-ile-kullanım-windows) •
-[Teknolojiler](#️-kullanılan-teknolojiler) •
-[Proje Yapısı](#-proje-yapısı)
+[Features](#-features) •
+[Screenshots](#-screenshots) •
+[Installation](#-installation) •
+[API Key Setup](#-setting-up-your-openai-api-key) •
+[Using the .exe](#-using-the-prebuilt-exe-windows) •
+[Tech Stack](#️-tech-stack) •
+[Project Structure](#-project-structure)
 
 </div>
 
 ---
 
-## 📌 Hakkında
+## 📌 About
 
-**Sotstech Python Editor**, Tkinter üzerine inşa edilmiş, karanlık temalı, profesyonel görünümlü bir masaüstü Python IDE'sidir. Klasik bir kod editörünün tüm temel özelliklerini (çoklu sekme, satır numarası, sözdizimi renklendirme, çalıştırma konsolu) sunmanın yanında, işin içine **OpenAI destekli bir yapay zekâ asistanı** ekler: editördeki herhangi bir kod bloğunu seçip *"bunu optimize et"*, *"hata yönetimi ekle"*, *"bunu iki modüle böl"* gibi doğal dilde bir talimat verirsiniz; yapay zekâ kodu talimata göre yeniden yazar ve siz onaylamadan hiçbir değişiklik editöre yansımaz.
+**Sotstech Python Editor** is a polished, dark-themed desktop Python IDE built entirely on Tkinter. It delivers everything you'd expect from a serious code editor — multi-tab editing, syntax highlighting, line numbers, a live output console — and then goes further by wiring in a genuinely useful **AI coding assistant**: select any block of code, tell it in plain English what you want done ("optimize this," "add error handling," "split this into two modules"), and the AI rewrites it for you. Nothing touches your editor until you explicitly approve the change.
 
-Bu proje sıfırdan geliştirilmiş, tek dosyalık (`.exe`) bir Windows uygulaması olarak da dağıtılabilir — kaynak kod ile birlikte PyInstaller derleme betiği de bu depoda yer alır.
+What really sets this editor apart is how *seamlessly* it runs real-world code. It doesn't just execute scripts — it actively supports them: it detects and silently installs missing dependencies, keeps matplotlib and OpenCV windows working flawlessly, and — most notably — replaces Python's blocking `input()` with a genuinely modern, non-blocking input experience (more on that below ⭐).
+
+The project ships both as readable source code **and** as a single-file, dependency-free Windows `.exe`, built with PyInstaller straight from this repo.
 
 ---
 
-## 🖼 Ekran Görüntüleri
+## 🖼 Screenshots
 
-Aşağıdaki akış, uygulamanın gerçek kullanımından alınmıştır: sıfır kod yazmadan sadece **doğal dil talimatı** vererek, matematiksel bir denklemi 3B grafiğe döken ve ardından bir webcam uygulamasını anında çalıştırıp çalıştıran uçtan uca bir örnektir.
+The flow below is taken directly from real usage: solving a math equation and plotting it in 3D, then spinning up a live webcam app — all from a single plain-English instruction, without writing a line of code by hand.
 
 <table>
 <tr>
 <td width="50%">
 
-**1️⃣ Ana ekran ve hazır demo**
-Karanlık IDE teması, sekme çubuğu, araç çubuğu (Run / AI Suggest / Add API Key) ve alt konsol paneli. Uygulama ilk açıldığında kullanım talimatlarını içeren bir örnek dosya (`demo.py`) hazır gelir ve tek tıkla çalıştırılabilir.
+**1️⃣ Home screen & built-in demo**
+Dark IDE theme, tab strip, toolbar (Run / AI Suggest / Add API Key), and a live console panel at the bottom. On first launch, a ready-to-run example file (`demo.py`) walks you through the basics — one click and it's running.
 
 <img src="docs/screenshots/01-editor-anasayfa.png" width="100%">
 
 </td>
 <td width="50%">
 
-**2️⃣ AI Suggest — doğal dilde talimat**
-`Ctrl+Space` ya da araç çubuğundaki **AI Suggest** butonuyla açılan pencereye, seçili kod için ne yapılmasını istediğiniz yazılır. Burada örnek talimat: *"main.py ve işlem/grafik modülünden oluşan, kullanıcıdan denklem alıp 3B grafik çizen modüler bir Python çözümü yaz."*
+**2️⃣ AI Suggest — instruct it in plain English**
+Hit `Ctrl+Space` or click **AI Suggest** and simply describe what you want. Example instruction shown here: *"Write a modular Python solution with a main.py and a processing/plotting module that takes an equation from the user and renders a 3D graph."*
 
 <img src="docs/screenshots/02-ai-suggest-talimat.png" width="100%">
 
@@ -60,16 +62,16 @@ Karanlık IDE teması, sekme çubuğu, araç çubuğu (Run / AI Suggest / Add AP
 <tr>
 <td width="50%">
 
-**3️⃣ Yapay zekânın ürettiği kod — önizleme**
-Model, talimatı iki dosyalık (`main.py` + `processing.py`) çalışan bir çözüme dönüştürür. Kod editöre uygulanmadan önce tam metin olarak gösterilir; kullanıcı **"Yes, Replace Code"** ile onaylar ya da reddeder.
+**3️⃣ AI-generated code — reviewed before it touches anything**
+The model turns your instruction into a complete, working two-file solution (`main.py` + `processing.py`). Nothing is applied blindly — the full result is shown first, and you choose **"Yes, Replace Code"** or reject it entirely.
 
 <img src="docs/screenshots/03-ai-suggest-sonuc.png" width="100%">
 
 </td>
 <td width="50%">
 
-**4️⃣ Üretilen kod, sözdizimi renklendirmeli sekmede**
-Onaylanan kod otomatik olarak ilgili sekmeye (burada `processing.py`) yazılır; `numpy`, `matplotlib`, `sympy` importları ve fonksiyon tanımı canlı sözdizimi renklendirmesiyle görüntülenir.
+**4️⃣ Generated code, fully syntax-highlighted**
+Once approved, the code lands directly in the right tab (`processing.py` here) — `numpy`, `matplotlib`, and `sympy` imports and function definitions rendered with live syntax highlighting, exactly as if you'd typed it yourself.
 
 <img src="docs/screenshots/04-uretilen-kod-sekmesi.png" width="100%">
 
@@ -78,16 +80,16 @@ Onaylanan kod otomatik olarak ilgili sekmeye (burada `processing.py`) yazılır;
 <tr>
 <td width="50%">
 
-**5️⃣ Çalışma anında `input()` desteği**
-Kod `input()` çağırdığında konsol donmaz — bunun yerine yerel bir **"Input Required"** penceresi açılır, kullanıcı değeri girer ve program kaldığı yerden devam eder.
+### ⭐ 5️⃣ Modern, non-blocking `input()` handling
+This is one of the editor's standout features. When your running code calls `input()`, most simple runners either freeze or crash — here, a clean, modern **"Input Required"** dialog pops up instead, complete with the original prompt text. You type your value, hit submit, and execution continues exactly where it left off. It feels less like a script running in a sandbox and more like a real, interactive application.
 
 <img src="docs/screenshots/05-input-dialog.png" width="100%">
 
 </td>
 <td width="50%">
 
-**6️⃣ Anlık çalıştırma + grafik çıktısı**
-`Run` (`F5`) ile kod çalıştırılır, konsolda `sympy` ile ayrıştırılmış denklem yazdırılır ve `matplotlib` ile interaktif, döndürülebilir bir **3B yüzey grafiği** ayrı bir pencerede açılır.
+**6️⃣ Instant execution + graphical output**
+Press `Run` (`F5`) and the console immediately prints the parsed equation via `sympy`, while `matplotlib` opens a fully interactive, rotatable **3D surface plot** in its own window — no extra configuration required.
 
 <img src="docs/screenshots/06-3d-grafik-ciktisi.png" width="100%">
 
@@ -96,16 +98,16 @@ Kod `input()` çağırdığında konsol donmaz — bunun yerine yerel bir **"Inp
 <tr>
 <td width="50%">
 
-**7️⃣ Eksik kütüphaneleri otomatik kurma**
-Yeni bir örnekte (`cv2` ile kamera uygulaması) çalıştırılan kodun ihtiyaç duyduğu `numpy` ve `opencv-python` paketleri sistemde yoksa veya sürüm uyumsuzsa, editör bunu tespit edip **arka planda `pip` ile otomatik kurar** ve kodu yeniden çalıştırır — kullanıcı terminale hiç dokunmaz.
+**7️⃣ Automatic dependency installation**
+In a completely different example (a live webcam app using `cv2`), the editor detects that `numpy` and `opencv-python` are missing or version-mismatched, **installs them automatically via pip in the background**, and re-runs the code — the user never has to open a terminal.
 
 <img src="docs/screenshots/07-otomatik-paket-kurulumu.png" width="100%">
 
 </td>
 <td width="50%">
 
-**8️⃣ Gerçek zamanlı donanım erişimi**
-Otomatik kurulumun ardından `OpenCV` penceresi açılır ve bilgisayarın kamerasından canlı görüntü akışını gösterir — editör, GUI açan/pencere oluşturan (matplotlib, OpenCV, Tkinter vb.) her türlü Python kodunu sorunsuz destekler.
+**8️⃣ Real-time hardware access**
+Right after auto-installation, an OpenCV window opens showing a live feed straight from the computer's webcam. The editor handles any window-spawning Python code gracefully — matplotlib, OpenCV, Tkinter, and beyond.
 
 <img src="docs/screenshots/08-canli-kamera-ciktisi.png" width="100%">
 
@@ -115,192 +117,192 @@ Otomatik kurulumun ardından `OpenCV` penceresi açılır ve bilgisayarın kamer
 
 ---
 
-## ✨ Özellikler
+## ✨ Features
 
-### 📝 Editör
-- **Çok sekmeli düzenleme** — `+ New Tab` (`Ctrl+T`) ile sınırsız sayıda sayfa; `Run` ve `AI Suggest` her zaman aktif sekme üzerinde çalışır.
-- **Sözdizimi renklendirme** — harici bağımlılık gerektirmeyen, hafif regex tabanlı Python vurgulayıcı (anahtar kelimeler, string'ler, yorumlar, sayılar, built-in fonksiyonlar).
-- **Senkronize satır numarası gutter'ı** her sekmede.
-- **Modern koyu tema** — profesyonel renk paleti, araç çubuğu, sekme şeridi, durum çubuğu.
-- **Standart dosya işlemleri** — Open / Save / Save As, sekme bazlı kaydedilmemiş değişiklik koruması.
-- **`dosyam/` çalışma alanı** — açtığınız/kaydettiğiniz her dosya uygulamayla aynı klasördeki bu klasörde tutulur.
-- **`import` otomatik önerisi** — `import ` veya `from ` yazmaya başlayınca, `dosyam/` klasöründeki diğer `.py` dosyaları soluk gri renkte önerilir; `Tab` ile kabul edilir.
-- **Kilitlenmeye dayanıklı tasarım** — kodunuzda, AI isteğinde ya da editörün kendisinde oluşan her beklenmeyen hata yakalanır, size gösterilir ve Output paneline loglanır; uygulama asla sessizce kapanmaz.
+### 📝 Editor
+- **Multi-tab editing** — open unlimited pages with `+ New Tab` (`Ctrl+T`); `Run` and `AI Suggest` always act on whichever tab is currently active.
+- **Syntax highlighting** — a lightweight, dependency-free Python highlighter (keywords, strings, comments, numbers, built-ins).
+- **Synced line-number gutter** in every tab.
+- **Polished dark theme** — a professional color palette across the toolbar, tab strip, and status bar.
+- **Standard file operations** — Open, Save, Save As, with per-tab unsaved-changes protection.
+- **`dosyam/` workspace folder** — every file you open or save lives right next to the app itself.
+- **Smart import auto-suggestion** — start typing `import ` or `from ` and any other `.py` file in the workspace is suggested inline in faded gray; press `Tab` to accept.
+- **Crash-proof by design** — any unexpected error (in your code, an AI request, or the editor itself) is caught, surfaced to you, and logged to the Output panel. The app never silently dies on you.
 
-### 🤖 Yapay Zekâ Asistanı
-- **Talimat tabanlı kod önerisi** — herhangi bir kod parçasını seçip `AI Suggest` (`Ctrl+Space`) ile ne yapılmasını istediğinizi serbest metin olarak yazarsınız (*"performansı artır"*, *"hata yönetimi ekle"*, *"bunu iki dosyaya böl"* vb.).
-- **Onay mekanizması** — üretilen kod doğrudan uygulanmaz; yan yana önizlenir, siz **Replace** ya da **Keep Original** seçersiniz.
-- **Tek seferlik API anahtarı kaydı** — `Add API Key` ile bir kez girilen anahtar yerel olarak saklanır, bir daha sorulmaz.
-- **OpenAI Chat Completions** üzerinden `gpt-4o-mini` modeli kullanılır (model, ortam değişkeni ile değiştirilebilir).
+### 🤖 AI Assistant
+- **Instruction-driven code suggestions** — select any snippet, hit `AI Suggest` (`Ctrl+Space`), and describe exactly what you want in free-form English.
+- **Safe by default, review-first workflow** — generated code is never applied automatically; you see it side-by-side and explicitly choose **Replace** or **Keep Original**.
+- **Set your API key once, forget about it** — enter it once via `Add API Key`, and it's remembered locally forever.
+- Powered by OpenAI's Chat Completions API using **`gpt-4o-mini`** (fully configurable via an environment variable).
 
-### ▶️ Kod Çalıştırma Motoru
-- **Tek tıkla çalıştırma** (`F5`) — aktif sekmenin kodu çalıştırılır, çıktı/hata ortak konsol panelinde gösterilir.
-- **Çalışan `input()` desteği** — konsolu kilitlemeden değeri bir pencere ile alır.
-- **Eksik paket tespiti ve otomatik kurulum** — `ModuleNotFoundError` / ABI uyuşmazlığı gibi durumlarda ilgili pip paketini otomatik tespit edip kurar, ardından kodu tekrar çalıştırır.
-- **matplotlib GUI backend yönetimi** — grafik çıktılarının ayrı, interaktif bir pencerede (Tk backend) doğru şekilde açılmasını garanti eder.
-- **GUI açan her türlü kodu destekler** — matplotlib, OpenCV, Tkinter gibi pencere/kamera açan scriptler dahil.
+### ▶️ Code Execution Engine
+- **One-click Run** (`F5`) — execute the active tab and see output/errors in the shared console.
+- **⭐ Modern `input()` handling** — the editor's signature feature: a clean input dialog captures values from running scripts instead of blocking or crashing the console, making interactive scripts feel like real applications.
+- **Automatic missing-package detection & installation** — `ModuleNotFoundError`s and ABI mismatches are detected, the right pip package is identified, installed automatically, and the code is re-run — completely hands-free.
+- **Robust matplotlib GUI backend handling** — plots reliably open in their own interactive Tk-backed window every time.
+- **Full support for GUI-spawning code** — matplotlib figures, OpenCV camera windows, Tkinter windows, and more, all work out of the box.
 
-### 📦 Dağıtım
-- **PyInstaller ile tek dosya `.exe`** — `build_exe.bat`, izole bir sanal ortam kurup bağımlılıkları oraya kurar ve `--onefile --windowed` modunda derler; ekstra kurulum gerektirmez.
-- `dosyam/` klasörü, derlenmiş `.exe` ile **aynı gerçek klasörde** kalıcı olarak oluşturulur (PyInstaller'ın geçici klasörüne değil) — böylece kaydettiğiniz dosyalar uygulamayı kapatıp açtığınızda kaybolmaz.
-
----
-
-## ⌨️ Klavye Kısayolları
-
-| İşlem                | Kısayol            |
-|-----------------------|---------------------|
-| Kodu çalıştır         | `F5`                |
-| AI Suggest            | `Ctrl + Space`      |
-| Yeni sekme            | `Ctrl + T`          |
-| Sekmeyi kapat         | `Ctrl + W`          |
-| Dosya aç              | `Ctrl + O`          |
-| Kaydet                | `Ctrl + S`          |
-| Farklı kaydet         | `Ctrl + Shift + S`  |
+### 📦 Distribution
+- **Single-file `.exe` via PyInstaller** — `build_exe.bat` sets up an isolated virtual environment, installs dependencies into it, and builds a `--onefile --windowed` executable. No installer, no setup wizard.
+- The `dosyam/` workspace is created **permanently next to the actual `.exe`** (not PyInstaller's temp folder), so nothing you save ever disappears between runs.
 
 ---
 
-## 🛠️ Kullanılan Teknolojiler
+## ⌨️ Keyboard Shortcuts
 
-| Katman | Teknoloji | Amaç |
+| Action              | Shortcut           |
+|---------------------|---------------------|
+| Run code            | `F5`                |
+| AI Suggest          | `Ctrl + Space`      |
+| New tab             | `Ctrl + T`          |
+| Close tab           | `Ctrl + W`          |
+| Open file           | `Ctrl + O`          |
+| Save                | `Ctrl + S`          |
+| Save As             | `Ctrl + Shift + S`  |
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Purpose |
 |---|---|---|
-| **Dil** | Python 3.9+ | Uygulamanın tamamı saf Python ile yazılmıştır |
-| **Arayüz (GUI)** | Tkinter / `ttk` | Pencere, sekmeler, menüler, diyaloglar, koyu tema |
-| **Yapay Zekâ** | [OpenAI API](https://platform.openai.com/) (`openai` Python SDK) — model: `gpt-4o-mini` | Seçili kodu, kullanıcı talimatına göre yeniden yazma |
-| **Ortam değişkenleri** | `python-dotenv` | Opsiyonel `.env` dosyasından `OPENAI_API_KEY` okuma |
-| **Süreç yönetimi** | `subprocess`, `importlib` | Eksik pip paketlerini arka planda tespit edip kurma |
-| **Paketleme** | [PyInstaller](https://pyinstaller.org/) | Tek dosyalık, bağımlılık gerektirmeyen `.exe` üretimi |
-| **Kalıcı ayarlar** | Yerel JSON dosyası (`~/.sotstech_python_editor/settings.json`) | API anahtarının güvenli/kalıcı şekilde saklanması |
-| **Örnek/çalıştırılabilir kodlarda** (kullanıcı tarafında, editörün kendi bağımlılığı değil) | `sympy`, `numpy`, `matplotlib`, `opencv-python` | Ekran görüntülerindeki 3B grafik ve kamera örnekleri bu editörde **üretilip çalıştırılan** kodlardır; editör bu paketleri kod ihtiyaç duyduğunda otomatik kurar |
+| **Language** | Python 3.9+ | The entire application is written in pure Python |
+| **GUI** | Tkinter / `ttk` | Windows, tabs, menus, dialogs, and the dark theme |
+| **AI** | [OpenAI API](https://platform.openai.com/) (`openai` Python SDK) — model: `gpt-4o-mini` | Rewrites selected code according to the user's instruction |
+| **Environment config** | `python-dotenv` | Optional `.env`-based `OPENAI_API_KEY` loading |
+| **Process management** | `subprocess`, `importlib` | Detects and installs missing pip packages in the background |
+| **Packaging** | [PyInstaller](https://pyinstaller.org/) | Produces a single-file, dependency-free `.exe` |
+| **Persistent settings** | Local JSON file (`~/.sotstech_python_editor/settings.json`) | Securely stores the API key between sessions |
+| **In example/generated code** (user-side, not an editor dependency) | `sympy`, `numpy`, `matplotlib`, `opencv-python` | The 3D graphing and webcam examples in the screenshots are programs *written and run inside this editor* — these libraries get auto-installed on demand |
 
-> ℹ️ **Not:** `sympy`, `numpy`, `matplotlib`, `opencv-python` editörün kendi `requirements.txt`'inde **yer almaz**. Bunlar, editör içinde yazılan/AI ile üretilen örnek programların bağımlılıklarıdır ve editörün "eksik paketi otomatik kurma" özelliği sayesinde ilk çalıştırmada otomatik yüklenir.
+> ℹ️ **Note:** `sympy`, `numpy`, `matplotlib`, and `opencv-python` are **not** part of the editor's own `requirements.txt`. They're dependencies of the sample/AI-generated programs shown above, and the editor's auto-install feature pulls them in automatically the first time they're needed.
 
 ---
 
-## 📥 Kurulum
+## 📥 Installation
 
-### Gereksinimler
+### Requirements
 - Python **3.9+**
-- (Opsiyonel) Bir **OpenAI API anahtarı** — sadece *AI Suggest* özelliği için gereklidir; editör ve kod çalıştırma özelliği anahtar olmadan da tam çalışır.
+- *(Optional)* An **OpenAI API key** — only required for the *AI Suggest* feature; the editor and code runner work perfectly well without one.
 
-### Kaynak koddan çalıştırma
+### Running from source
 
 ```bash
-git clone https://github.com/<kullanici-adiniz>/<repo-adi>.git
-cd <repo-adi>/ai_code_editor
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>/ai_code_editor
 python -m pip install -r requirements.txt
 python main.py
 ```
 
 ---
 
-## 🔑 OpenAI API Anahtarını Tanımlama
+## 🔑 Setting Up Your OpenAI API Key
 
-Herhangi bir dosya düzenlemenize veya ortam değişkeni ayarlamanıza **gerek yoktur**:
+No file editing or environment variables required:
 
-1. Araç çubuğundaki **Add API Key** butonuna (veya menüden **AI Assistant → Add API Key**) tıklayın.
-2. `sk-...` ile başlayan OpenAI API anahtarınızı yapıştırın.
-3. **Save Key**'e basın.
+1. Click **Add API Key** in the toolbar (or **AI Assistant → Add API Key** from the menu).
+2. Paste your OpenAI API key (starts with `sk-...`).
+3. Click **Save Key**.
 
-Anahtar, kullanıcı klasörünüzdeki küçük bir ayar dosyasına (`~/.sotstech_python_editor/settings.json`) kaydedilir ve uygulama her açıldığında otomatik yüklenir. Aynı pencereden istediğiniz zaman anahtarı güncelleyebilir veya silebilirsiniz.
+The key is saved to a small local settings file (`~/.sotstech_python_editor/settings.json`) and loaded automatically every time you launch the app. Return to the same dialog anytime to update or remove it.
 
-> 🔒 Anahtarınız yalnızca kendi bilgisayarınızda yerel olarak saklanır; bir öneri istediğinizde doğrudan OpenAI'ye gönderilir dışında hiçbir yere iletilmez.
+> 🔒 Your key is stored locally on your own machine only, and is sent nowhere except directly to OpenAI whenever you request a suggestion.
 
-*(İleri düzey/opsiyonel: `OPENAI_API_KEY` ortam değişkeni ya da yerel bir `.env` dosyası da tanımlayabilirsiniz — bu, kayıtlı anahtara göre önceliklidir.)*
+*(Advanced/optional: you can also set an `OPENAI_API_KEY` environment variable or a local `.env` file — it takes priority over the saved key.)*
 
 ```env
-# .env (opsiyonel)
+# .env (optional)
 OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
 OPENAI_MODEL=gpt-4o-mini
 ```
 
 ---
 
-## 💾 Hazır .exe ile Kullanım (Windows)
+## 💾 Using the Prebuilt .exe (Windows)
 
-Kaynak kodu hiç görmeden, Python kurmadan doğrudan kullanmak isteyenler için derlenmiş sürüm:
+For anyone who wants to skip Python entirely and just run the app:
 
-1. **[Releases](../../releases)** bölümünden en güncel `SotstechPythonEditor.exe` dosyasını indirin *(ya da bu depodaki `ai_code_editor/dist/` klasöründen)*.
-2. `.exe` dosyasını istediğiniz bir klasöre koyun ve çift tıklayarak çalıştırın — kurulum gerekmez.
-3. Uygulama ilk açıldığında, `.exe` ile **aynı klasörde** otomatik olarak bir `dosyam/` klasörü oluşturulur; tüm açtığınız/kaydettiğiniz dosyalar burada kalıcı olarak tutulur.
-4. AI Suggest özelliğini kullanmak için yukarıdaki [API anahtarı adımlarını](#-openai-api-anahtarını-tanımlama) izleyin.
+1. Grab the latest `SotstechPythonEditor.exe` from the **[Releases](../../releases)** page *(or from the `ai_code_editor/dist/` folder in this repo)*.
+2. Drop it into any folder and double-click to run — no installation needed.
+3. On first launch, a `dosyam/` folder is created automatically right next to the `.exe`; everything you open or save is kept there permanently.
+4. To use AI Suggest, follow the [API key steps above](#-setting-up-your-openai-api-key).
 
-> ⚠️ `.exe`'yi farklı bir bilgisayara veya klasöre taşırsanız, yanındaki `dosyam/` klasörünü de birlikte taşıyın (taşımazsanız yeni konumda otomatik olarak boş şekilde yeniden oluşturulur).
+> ⚠️ If you move the `.exe` to another computer or folder, move its `dosyam/` folder along with it (otherwise it will simply be recreated empty in the new location).
 
-### Kendi `.exe` dosyanızı derlemek isterseniz
+### Building your own .exe
 
-Depoda hazır bir derleme betiği bulunur:
+A ready-to-go build script is included:
 
 ```bat
 cd ai_code_editor
 build_exe.bat
 ```
 
-Bu betik izole bir sanal ortam (`build_env`) kurar, bağımlılıkları oraya yükler ve PyInstaller ile `--onefile --windowed` modunda derler. Çıktı: `ai_code_editor\dist\SotstechPythonEditor.exe`. Detaylı adımlar için [`HOW_TO_BUILD_EXE.md`](HOW_TO_BUILD_EXE.md) dosyasına bakın.
+This script spins up an isolated virtual environment (`build_env`), installs dependencies into it, and builds a `--onefile --windowed` executable with PyInstaller. Output: `ai_code_editor\dist\SotstechPythonEditor.exe`. See [`HOW_TO_BUILD_EXE.md`](HOW_TO_BUILD_EXE.md) for full details.
 
 ---
 
-## 📂 Proje Yapısı
+## 📂 Project Structure
 
 ```
 SotstechPythonEditor/
 ├── ai_code_editor/
-│   ├── main.py                    # Uygulama giriş noktası
-│   ├── editor_app.py              # Ana pencere: sekmeler, menüler, araç çubuğu, çalıştırma motoru
-│   ├── editor_tab.py              # Tek bir editör sekmesi (metin alanı, gutter, durum)
-│   ├── ai_assistant.py            # OpenAI API entegrasyonu (talimat tabanlı)
-│   ├── syntax_highlighter.py      # Hafif Python sözdizimi renklendirici
-│   ├── line_numbers.py            # Satır numarası gutter bileşeni
-│   ├── console_redirector.py      # stdout/stderr çıktısını Output paneline yönlendirir
-│   ├── theme.py                   # Merkezi renk/yazı tipi/boşluk tanımları
-│   ├── config.py                  # Uygulama ayarları, API anahtarı ve çalışma alanı yolları
-│   ├── app_icon.ico                # Uygulama simgesi
-│   ├── SotstechPythonEditor.spec   # PyInstaller derleme tanımı
-│   ├── build_exe.bat               # Tek tıkla .exe derleme betiği
+│   ├── main.py                    # Application entry point
+│   ├── editor_app.py              # Main window: tabs, menus, toolbar, execution engine
+│   ├── editor_tab.py              # A single editor tab (text area, gutter, state)
+│   ├── ai_assistant.py            # OpenAI API integration (instruction-driven)
+│   ├── syntax_highlighter.py      # Lightweight Python syntax highlighter
+│   ├── line_numbers.py            # Line-number gutter component
+│   ├── console_redirector.py      # Redirects stdout/stderr to the Output panel
+│   ├── theme.py                   # Centralized colors, fonts, spacing
+│   ├── config.py                  # App settings, API key, and workspace paths
+│   ├── app_icon.ico                # Application icon
+│   ├── SotstechPythonEditor.spec   # PyInstaller build definition
+│   ├── build_exe.bat               # One-click .exe build script
 │   ├── requirements.txt
-│   ├── dosyam/                     # Varsayılan çalışma alanı — dosyalarınız burada
-│   │   ├── demo.py                   # Örnek dosya (import önerisi + input() denemesi)
-│   │   └── helper_utils.py           # İçe aktarılabilecek örnek ikinci modül
+│   ├── dosyam/                     # Default workspace — your files live here
+│   │   ├── demo.py                   # Example file (try the import suggestion + input())
+│   │   └── helper_utils.py           # Example second module to import
 │   └── dist/
-│       └── SotstechPythonEditor.exe  # ← Derlenmiş .exe'yi buraya ekleyin
+│       └── SotstechPythonEditor.exe  # ← Add the compiled .exe here
 ├── docs/
-│   └── screenshots/                # README'deki ekran görüntüleri
+│   └── screenshots/                # Screenshots used in this README
 ├── HOW_TO_BUILD_EXE.md
 └── README.md
 ```
 
 ---
 
-## 🔐 Güvenlik Notu
+## 🔐 Security Note
 
-Editördeki `Run` komutu, yazdığınız kodu `exec()` ile çalıştırır — tıpkı yerelde kendi başınıza çalıştıracağınız herhangi bir Python betiği gibi. **Sadece güvendiğiniz kodu çalıştırın.** API anahtarınız yalnızca kendi makinenizde saklanır ve yalnızca doğrudan OpenAI'ye giden isteklerde kullanılır.
-
----
-
-## 🗺️ Yol Haritası
-
-- [ ] Çoklu AI sağlayıcı desteği (Anthropic, yerel modeller)
-- [ ] Entegre `pip` paket yöneticisi paneli
-- [ ] Tema özelleştirme (açık/koyu tema geçişi)
-- [ ] macOS / Linux için derleme betikleri
+The editor's `Run` command executes your code with `exec()` — exactly like running any local Python script yourself. **Only run code you trust.** Your API key is stored locally on your own machine and is only ever used in direct requests to OpenAI.
 
 ---
 
-## 🤝 Katkıda Bulunma
+## 🗺️ Roadmap
 
-Katkılar memnuniyetle karşılanır! Bir *issue* açabilir veya doğrudan *pull request* gönderebilirsiniz:
+- [ ] Multi-provider AI support (Anthropic, local models)
+- [ ] Built-in pip package manager panel
+- [ ] Theme customization (light/dark toggle)
+- [ ] macOS / Linux build scripts
+
+---
+
+## 🤝 Contributing
+
+Contributions are very welcome! Open an issue or submit a pull request directly:
 
 ```bash
-git checkout -b ozellik/harika-bir-ozellik
-git commit -m "Harika bir özellik eklendi"
-git push origin ozellik/harika-bir-ozellik
+git checkout -b feature/amazing-feature
+git commit -m "Add amazing feature"
+git push origin feature/amazing-feature
 ```
 
 ---
 
-## 📄 Lisans
+## 📄 License
 
-Bu proje **MIT Lisansı** ile lisanslanmıştır — kullanabilir, değiştirebilir ve üzerine geliştirme yapabilirsiniz. Detaylar için [`LICENSE`](LICENSE) dosyasına bakın.
+This project is licensed under the **MIT License** — use it, modify it, build on it. See [`LICENSE`](LICENSE) for details.
 
 ---
 
