@@ -191,9 +191,9 @@ Right after auto-installation, an OpenCV window opens showing a live feed straig
 
 ### Running from source
 
-```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>/ai_code_editor
+```bash  
+git clone https://github.com/AstroBesat-SoftW/Python-Editor.git
+cd Python-Editor/ai_code_editor
 python -m pip install -r requirements.txt
 python main.py
 ```
