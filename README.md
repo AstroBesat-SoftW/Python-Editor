@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="docs/logo.png" width="120" alt="Sotstech Python Editor logo">
+
 # 🧠 Sotstech Python Editor
 
 ### An AI-powered, multi-tab, desktop Python code editor
@@ -21,6 +23,8 @@ Missing libraries get installed automatically, `input()` calls are handled throu
 [Using the .exe](#-using-the-prebuilt-exe-windows) •
 [Tech Stack](#️-tech-stack) •
 [Project Structure](#-project-structure)
+
+<sub>This project was developed by **Besat Çıngar** and is released fully open-source — the goal is to build it together with other developers into a strong, shared resource and contribute to the Python and software community, sparking that collaboration right from here. Feel free to reach out anytime: **besat59@gmail.com**</sub>
 
 </div>
 
