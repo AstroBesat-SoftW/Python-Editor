@@ -40,15 +40,15 @@ This release drops the PyInstaller/`.exe` packaging from earlier versions in fav
 
 ## 🖼 Screenshots
 
-**1️⃣ Chat-driven workflow, with autonomous auto-fix**
-The AI sidebar walks through multi-step tasks on its own ("Step 2… Step 3…"), reporting progress as it writes code. Here it detects a NumPy/scikit-learn ABI mismatch in the console, applies an automatic fix, and reruns the script until the F1/MCC/Kappa metrics print cleanly.
+**1️⃣ Instant graphical output**
+Ask for a 3D visualization and the assistant generates a complete script, explains what it built, and — once run — opens a fully interactive `matplotlib` 3D surface plot in its own window.
 
 <img src="docs/screenshots/01-editor-anasayfa.png" width="100%">
 
 ---
 
-**2️⃣ Instant graphical output**
-Ask for a 3D visualization and the assistant generates a complete script, explains what it built, and — once run — opens a fully interactive `matplotlib` 3D surface plot in its own window.
+**2️⃣ Chat-driven workflow, with autonomous auto-fix**
+The AI sidebar walks through multi-step tasks on its own ("Step 2… Step 3…"), reporting progress as it writes code. Here it detects a NumPy/scikit-learn ABI mismatch in the console, applies an automatic fix, and reruns the script until the F1/MCC/Kappa metrics print cleanly.
 
 <img src="docs/screenshots/02-3d-grafik-ciktisi.png" width="100%">
 
