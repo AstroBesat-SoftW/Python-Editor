@@ -1,6 +1,0 @@
-Derlenmiş SotstechPythonEditor.exe dosyasini bu klasore kopyalayin:
-  ai_code_editor/dist/SotstechPythonEditor.exe
-
-Not: GitHub tek dosyada 100 MB sinirini uyguluyor. Eger exe bu siniri
-asarsa, dosyayi buraya commitlemek yerine reponun "Releases" bolumune
-yukleyin ve README'deki indirme linkini o surume yonlendirin.
