@@ -1,0 +1,6 @@
+openai>=1.0.0
+python-dotenv>=1.0.0
+
+# Only needed if you want to regenerate the icons in assets/
+# via `python generate_assets.py`
+# Pillow>=10.0.0
