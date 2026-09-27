@@ -10,7 +10,7 @@
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-0078D6)
 ![OpenAI](https://img.shields.io/badge/AI-OpenAI%20GPT--4o--mini-412991?logo=openai&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-3.3.0-blueviolet)
+![Version](https://img.shields.io/badge/version-1.89.9-blueviolet)
 
 **Chat with an AI assistant that writes, updates, and runs entire files for you — right inside the editor.**
 Describe what you want in plain language, watch the assistant create or update the exact file you need, then hit **Run** and let it auto-fix missing packages, ABI/version mismatches, and errors on its own.
