@@ -4,7 +4,7 @@
 
 # 🧠 Sotstech AI Python Editor
 
-### An AI-powered, chat-driven desktop Python code editor v1.82.9
+### An AI-powered, chat-driven desktop Python code editor *v1.82.9*
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue?logo=python&logoColor=white)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-0078D6)
