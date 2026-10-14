@@ -205,6 +205,6 @@ This project is licensed under the **MIT License** — use it, modify it, build 
 
 <div align="center">
 
-Made with ❤️ using Python & OpenAI — **Sotstech AI Python Editor**
+Made with ❤️ using Python & AI — **Sotstech AI Python Editor**
 
 </div>
